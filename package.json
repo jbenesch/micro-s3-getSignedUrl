@@ -1,0 +1,25 @@
+{
+  "name": "micro-s3-getSignedUrl",
+  "version": "1.0.0",
+  "description": "Retrieve an AWS S3 signed url for uploading images to an AWS S3 bucket.",
+  "main": "index.js",
+  "author": "Jason Benesch <jasonbenesch@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "jwt": "./bin/jwt.js",
+    "dev": "nodemon -x micro",
+    "start": "micro"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.22.0",
+    "dotenv": "^4.0.0",
+    "jsonwebtoken": "^7.3.0",
+    "micro": "^7.0.6",
+    "micro-boom": "^1.0.1",
+    "micro-cors": "^0.0.1",
+    "micro-jwt-auth": "^1.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
