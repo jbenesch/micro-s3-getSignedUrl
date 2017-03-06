@@ -47,7 +47,7 @@ const getSignedUrl = async (req, res) => {
 const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
 
 module.exports = compose(
-  jwtAuth(JWT_PRIVATE_KEY),
   cors,
+  jwtAuth(JWT_PRIVATE_KEY),
   handleErrors
 )(getSignedUrl);
