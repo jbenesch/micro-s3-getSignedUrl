@@ -31,23 +31,27 @@ const s3 = new aws.S3({
 const getSignedUrl = async (req, res) => {
   const { query } = parse(req.url, true);
 
-  if (!query.key) {
+  if (!query.name || !query.type) {
     throw createError(400, 'Incorrect Configuration', {
-      reason: 'A Key (`?key=filename`) is required to run this micro service.'
+      reason: 'File name and type (`?name=fileName.jpg&type=image/jpeg`) are required to run this micro service.'
     });
   }
 
-  return await s3.getSignedUrl('putObject', {
+  const url = await s3.getSignedUrl('putObject', {
     Bucket: AWS_S3_BUCKET,
-    Key: query.key,
+    Key: query.name,
     Expires: 60,
+    ContentType: query.type,
+    ACL: 'public-read'
   });
+
+  return { url };
 };
 
 const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
 
 module.exports = compose(
+  handleErrors,
   cors,
-  jwtAuth(JWT_PRIVATE_KEY),
-  handleErrors
+  jwtAuth(JWT_PRIVATE_KEY)
 )(getSignedUrl);
