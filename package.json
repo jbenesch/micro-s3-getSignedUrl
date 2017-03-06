@@ -6,7 +6,7 @@
   "author": "Jason Benesch <jasonbenesch@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "jwt": "./bin/jwt.js",
+    "token": "./bin/jwt.js",
     "dev": "nodemon -x micro",
     "start": "micro"
   },

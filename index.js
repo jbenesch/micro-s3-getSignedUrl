@@ -49,5 +49,5 @@ const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
 module.exports = compose(
   jwtAuth(JWT_PRIVATE_KEY),
   cors,
-  handleErrors,
+  handleErrors
 )(getSignedUrl);
