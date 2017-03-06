@@ -1,0 +1,7 @@
+{
+  "name": "micro-s3-getSignedUrl",
+  "env": {
+    "NODE_ENV": "production",
+    "AWS_REGION": "us-east-1"
+  }
+}

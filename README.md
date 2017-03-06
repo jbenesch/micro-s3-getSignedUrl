@@ -3,7 +3,15 @@ AWS S3 signed url micro service for https://github.com/zeit/micro
 
 ## Getting Started
 1. Clone this repo
-2. Create a .env file which contains the following variables:
+2. Create a .env file: `touch .env` (see next section for contents)
+3. Install dependencies: `yarn`
+4. Generate an auth token: `yarn run token` (make sure to also add this to .env file)
+5. Start the micro service: `yarn start`
+
+Now to generate a signed url:
+`curl -H 'Authorization: Bearer TOKEN_CREATED_IN_STEP_4' http://localhost:3000/?key=mypicture.png`
+
+## Environment Variables Needed
 ```
 AWS_ACCESS_KEY=YOUR_ACCESS_KEY
 AWS_SECRET_KEY=YOUR_SECRET_KEY
@@ -11,9 +19,15 @@ AWS_S3_BUCKET=YOUR_BUCKET_NAME
 AWS_REGION=us-east-1
 JWT_PRIVATE_KEY=CREATE_PRIVATE_KEY
 ```
-3. Install dependencies: `yarn`
-4. Generate an auth token: `yarn run token`
-5. Start the micro service: `yarn start`
 
-Now to generate a signed url:
-`curl -H 'Authorization: Bearer TOKEN_CREATED_IN_STEP_4' http://localhost:3000/?key=mypicture.png`
+## Launching micro service with now
+1. Add all of your environment variables to now secrets: (see below)
+2. Deploy!
+
+```
+now secrets add aws_access_key "YOUR_ACCESS_KEY"
+now secrets add aws_secret_key "YOUR_SECRET_KEY"
+now secrets add aws_s3_bucket "YOUR_BUCKET_NAME"
+now secrets add jwt_private_key "CREATE_PRIVATE_KEY"
+```
+`now -e AWS_ACCESS_KEY=@aws_access_key -e AWS_SECRET_KEY=@aws_secret_key -e AWS_S3_BUCKET=@aws_s3_bucket -e JWT_PRIVATE_KEY=@jwt_private_key`
